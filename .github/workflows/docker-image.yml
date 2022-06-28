@@ -9,10 +9,14 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag workstation:$(date +%s) --tag workstation:$(date +%s)
+      env:
+        CR_PAT: ${{ secrets.PAT }}
+      run: |
+        echo $CR_PAT | docker login ghcr.io -u AWinterman --password-stdin
+        docker build . --file Dockerfile --tag workstation:$(date +%s) --tag workstation:latest
+        docker push ghcr.io/AWinterman/workstation
