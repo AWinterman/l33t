@@ -19,4 +19,4 @@ jobs:
       run: |
         echo $CR_PAT | docker login ghcr.io -u AWinterman --password-stdin
         docker build . --file Dockerfile --tag workstation:$(date +%s) --tag workstation:latest
-        docker push ghcr.io/AWinterman/workstation
+        docker push ghcr.io/awinterman/workstation
