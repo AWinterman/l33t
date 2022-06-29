@@ -1,5 +1,6 @@
 
-FROM golang:latest
+ARG VARIANT=1-bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/go:0-${VARIANT}
 
 RUN apt update && apt install --yes openssh-server git
 
