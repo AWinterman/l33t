@@ -8,6 +8,14 @@ import (
 	"github.com/awinterman/l33t"
 )
 
+func TestQuickSort_withStrings(t *testing.T ) {
+	want := []string{"b", "c", "d", "e"}
+	got := l33t.Quicksort([]string{"c", "b", "e", "d"});
+	if  !reflect.DeepEqual(got, want) {
+		t.Errorf("Quicksort() = %v, want %v", got, want)
+	}
+}
+
 func TestQuicksort(t *testing.T) {
 	tests := []struct {
 		name string
@@ -15,9 +23,9 @@ func TestQuicksort(t *testing.T) {
 		want []int
 	}{
 		{
-			name: "empty case",
-			args: []int{},
-			want: []int{},
+			name: "reverse order case",
+			args: []int{5, 4, 3, 2, 1},
+			want: []int{1, 2, 3, 4, 5},
 		},
 		{
 			name: "reverse order case",
@@ -30,12 +38,23 @@ func TestQuicksort(t *testing.T) {
 			want: []int{1, 2, 3, 7, 9, 10, 10, 10, 11, 15},
 		},
 		{
+			name: "empty case",
+			args: []int{},
+			want: []int{},
+		},
+		
+		{
 			name: "two elements",
 			args: []int{2, 1},
 			want: []int{1, 2},
 		},
 		{
-			name: "three elements",
+			name: "two elements in order",
+			args: []int{1, 2},
+			want: []int{1, 2},
+		},
+		{
+			name: "three elements; reverse order",
 			args: []int{3, 2, 1},
 			want: []int{1, 2, 3},
 		},
