@@ -1,8 +1,6 @@
 package l33t
 
 import (
-	"log"
-
 	"golang.org/x/exp/constraints"
 )
 
@@ -14,7 +12,7 @@ func Quicksort[T constraints.Ordered](A []T) []T {
 func quicksort[T constraints.Ordered](A []T, lo, hi int) []T {
 	// log.Printf("sort %v[%d:%d]", A, lo, hi)
 	if lo >= 0 && hi >= 0 && lo < hi {
-		A, p := partition(A, lo, hi)
+		A, p := swaps(A, lo, hi)
 
 		A = quicksort(A, lo, p)   // left of pivot
 		A = quicksort(A, p+1, hi) // right of pivot
@@ -25,7 +23,7 @@ func quicksort[T constraints.Ordered](A []T, lo, hi int) []T {
 
 }
 
-func partition[T constraints.Ordered](A []T, lo, hi int) ([]T, int) {
+func swaps[T constraints.Ordered](A []T, lo, hi int) ([]T, int) {
 
 	middle := ((hi + lo) / 2)
 	pivot := A[middle] // The value in the middle of the array
@@ -45,7 +43,7 @@ func partition[T constraints.Ordered](A []T, lo, hi int) ([]T, int) {
 		// log.Printf("	found: A[%v] = %v < pivot A[%v] = %v < A[%v] = %v; ", left, A[left], middle, pivot, right, A[right])
 
 		if left >= right {
-			log.Printf("		because cursors met; returning %v and pivot %v", A, right)
+			// log.Printf("		because cursors met; returning %v and pivot %v", A, right)
 			return A, right
 		}
 
